@@ -4,8 +4,10 @@ import SalaryCalculation from './components/SalaryCalculation';
 
 const App: React.FunctionComponent = () => {
   return (
-    <div className="card">
-      <SalaryCalculation value={40000} />
+    <div className="d-flex justify-content-center my-4">
+      <div className="card p-4">
+        <SalaryCalculation value={40000} />
+      </div>
     </div>
   )
 }

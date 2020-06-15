@@ -4,6 +4,7 @@ import RadioInput from './RadioInput';
 import Toggler from './Toggler';
 import InputNumber from './InputNumber';
 import NDFLHint from './NDFLHint';
+import InfoTooltip from './InfoTooltip';
 
 interface Props {
   value?: number;
@@ -38,25 +39,39 @@ export default class SalaryCalculation extends React.Component<Props> {
     const { selected, withoutNDFL, salary } = this.state;
 
     return (
-      <div>
-        <h5>Сумма</h5>
-        <RadioInput name="salary" value="month" checked={selected == 'month'} onChange={this.handleChangeRadio}>
-          <b>Оплата за месяц</b>
-        </RadioInput>
-        <RadioInput name="salary" value="mrot" checked={selected == 'mrot'} onChange={this.handleChangeRadio}>
-          <b>МРОТ</b>
-        </RadioInput>
-        <RadioInput name="salary" value="day" checked={selected == 'day'} onChange={this.handleChangeRadio}>
-          <b>Оплата за день</b>
-        </RadioInput>
-        <RadioInput name="salary" value="hour" checked={selected == 'hour'} onChange={this.handleChangeRadio}>
-          <b>Оплата за час</b>
-        </RadioInput>
-
-        <Toggler checked={withoutNDFL} onChange={this.handleChangeNdfl } uncheckedLabel="Указать с НДФЛ" checkedLabel="Без НДФЛ"/>
-
-        <InputNumber value={salary} />
-
+      <div className="salary-calculation">
+        <small className="text-muted">Сумма</small>
+        <div>
+          <RadioInput name="salary" value="month" checked={selected == 'month'} onChange={this.handleChangeRadio}>
+            <b>Оклад за месяц</b>
+          </RadioInput>
+          <RadioInput name="salary" value="mrot" checked={selected == 'mrot'} onChange={this.handleChangeRadio}>
+            <b className="d-flex align-items-center">МРОТ 
+              <InfoTooltip>
+                 МРОТ - минимальный размер оплаты труда. Разный для разных регионов.
+              </InfoTooltip>
+            </b>
+          </RadioInput>
+          <RadioInput name="salary" value="day" checked={selected == 'day'} onChange={this.handleChangeRadio}>
+            <b>Оплата за день</b>
+          </RadioInput>
+          <RadioInput name="salary" value="hour" checked={selected == 'hour'} onChange={this.handleChangeRadio}>
+            <b>Оплата за час</b>
+          </RadioInput>
+        </div>
+        {  
+          selected != 'mrot' && (
+            <>
+              <Toggler checked={withoutNDFL} onChange={this.handleChangeNdfl } uncheckedLabel="Указать с НДФЛ" checkedLabel="Без НДФЛ"/>
+              <div className="d-flex my-3 align-items-center">
+                <div><InputNumber value={salary} /></div>
+                <b className="ml-3">₽ 
+                  { selected == 'day' && ' в день'}
+                  { selected == 'hour' && ' в час'}
+                </b>
+              </div>
+            </>
+        )}
         { selected == 'month' && <NDFLHint salary={salary} withoutNDFL={withoutNDFL} /> }
       </div>
     );

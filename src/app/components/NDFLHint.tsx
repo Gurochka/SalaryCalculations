@@ -24,10 +24,10 @@ export default class NDFLHint extends React.Component<Props> {
 
     return (
       <div className="hint">
-        <p><b>{formatNum(inHands)} ₽</b> сотрудник будет получать на руки</p>
-        <p><b>{formatNum(ndflTotal)} ₽</b> НДФЛ, 13% от оклада</p>
-        <p><b>{formatNum(total)} ₽</b> за сотрудника в месяц </p>
+        <div><b>{formatNum(inHands)} ₽</b> сотрудник будет получать на руки</div>
+        <div><b>{formatNum(ndflTotal)} ₽</b> НДФЛ, 13% от оклада</div>
+        <div><b>{formatNum(total)} ₽</b> за сотрудника в месяц </div>
       </div>
-    )    
+    )
   } 
 }

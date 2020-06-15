@@ -1,0 +1,48 @@
+.salary-calculation{
+  width: 400px;
+  h6{
+    color: $text-muted;
+    font-size: 0.8em;
+  }
+  .radio-input b{
+    font-weight: 500;
+  }
+
+  .toggler{
+    margin: 1rem 0 1rem 1.5rem;
+    small{
+      font-weight: 600;
+      transition: color 0.5s ease;
+      &:first-child{
+        color: inherit;
+        margin-right: 0.5rem;
+      }
+      &:last-child{
+        color: $gray-500;
+        margin-left: 0.5rem;
+      }
+    }
+
+    &.toggler-checked{
+      small{
+        &:first-child{
+          color: $gray-500;
+        }
+        &:last-child{
+          color: inherit;
+        }
+      }
+    }
+  }
+  input[type=text]{
+    max-width: 200px;
+    margin-left: 1.5rem;
+  }
+  .hint{
+    background-color: #fbf3dc;
+    padding: 1.5rem;
+    & > div{
+      margin-bottom: 0.5rem;
+    }
+  }
+}

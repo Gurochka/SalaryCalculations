@@ -7,7 +7,7 @@ const RadioInput: React.FunctionComponent<{
   onChange?:  (value:string) => void
 }> = (props) => {
   return (
-    <div className="form-check">
+    <div className="form-check radio-input my-2">
       <input className="form-check-input" type="radio" 
         name={props.name} 
         id={`${props.name}_${props.value}`} 

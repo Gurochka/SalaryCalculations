@@ -1,0 +1,33 @@
+.radio-input{
+  position: relative;
+  padding: 0;
+  margin-left: 1.5rem;
+  input[type='radio']{
+    display: none;
+  }
+  label:before {
+    content: " ";
+    position: absolute;
+    top: 5px;
+    left: -1.5rem;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 1px solid $gray-700;
+  }
+  input[type=radio]:checked + label:after {
+    content: " ";
+    border-radius: 50%;
+    width: 8px;
+    height: 8px;
+    position: absolute;
+    top: 9px;
+    left: calc(-1.5rem + 4px);
+    background: $gray-700;
+  }  
+}
+
+input[type=text]{
+  border-radius: 1.2rem;
+  font-weight: 500;
+}
