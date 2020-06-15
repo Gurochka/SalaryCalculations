@@ -27,16 +27,31 @@ export default class SalaryCalculation extends React.Component<Props> {
     value: 0
   };
 
-  handleChangeRadio = (value:string) => {
-    this.setState({ selected: value});
+  transformSalary = (from:string, to:string, val:number) => {
+    if (from == 'month' && to == 'day') return val/20;
+    if (from == 'month' && to == 'hour') return val/(20*8);
+    if (from == 'day' && to == 'month') return val*20;
+    if (from == 'day' && to == 'hour') return val/8;
+    if (from == 'hour' && to == 'month') return val*20*8;
+    if (from == 'hour' && to == 'day') return val*8;
+    return val;
   }
 
-  handleChangeNdfl = (value:boolean) =>{
+  handleChangeRadio = (value:string) => {
+    this.setState({ selected: value });
+  }
+
+  handleChangeNdfl = (value:boolean) => {
     this.setState({ withoutNDFL: value });
+  }
+
+  handleSalaryChange = (value: number) => {
+    this.setState({ salary: this.transformSalary(this.state.selected, 'month', value) })
   }
 
   render () {
     const { selected, withoutNDFL, salary } = this.state;
+    const inputValue = this.transformSalary('month', selected, salary);
 
     return (
       <div className="salary-calculation">
@@ -64,7 +79,7 @@ export default class SalaryCalculation extends React.Component<Props> {
             <>
               <Toggler checked={withoutNDFL} onChange={this.handleChangeNdfl } uncheckedLabel="Указать с НДФЛ" checkedLabel="Без НДФЛ"/>
               <div className="d-flex my-3 align-items-center">
-                <div><InputNumber value={salary} /></div>
+                <InputNumber value={inputValue} onChange={this.handleSalaryChange} />
                 <b className="ml-3">₽ 
                   { selected == 'day' && ' в день'}
                   { selected == 'hour' && ' в час'}

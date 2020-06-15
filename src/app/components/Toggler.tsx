@@ -1,11 +1,13 @@
 import * as React from 'react';
 
-const Toggler: React.FunctionComponent<{
+interface Props {
   checked: boolean;
   checkedLabel?: string;
   uncheckedLabel?: string;
   onChange?: (value:boolean) => void
-}> = (props) => {
+}
+
+const Toggler: React.FunctionComponent<Props> = (props) => {
   return (
     <div className={`d-flex toggler ${props.checked ? 'toggler-checked' : ''}`}>
       { props.checkedLabel && <small>{props.uncheckedLabel}</small>}

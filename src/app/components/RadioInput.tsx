@@ -1,11 +1,13 @@
 import * as React from 'react';
 
-const RadioInput: React.FunctionComponent<{
+interface Props {
   name: string;
   value?: string;
   checked?: boolean;
   onChange?:  (value:string) => void
-}> = (props) => {
+}
+
+const RadioInput: React.FunctionComponent<Props> = (props) => {
   return (
     <div className="form-check radio-input my-2">
       <input className="form-check-input" type="radio" 

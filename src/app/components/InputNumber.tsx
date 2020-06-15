@@ -1,12 +1,41 @@
-import * as React from 'react';
+import React, { FunctionComponent, useState, SyntheticEvent } from 'react';
 
-const InputNumber: React.FunctionComponent<{
+interface Props {
   placeholder?: string;
   value: number;
-  onChange?: (value:boolean) => void
-}> = (props) => {
-  return (
-    <input className="form-control" type="text" placeholder={props.placeholder} value={props.value}/>
-  )
+  onChange?: (value:number) => void
 }
-export default InputNumber;
+
+interface State {
+  val: string;
+}
+
+const formatNum = (num:number) => Math.round(num).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+
+export default class InputNumber extends React.Component<Props> {
+  state: State = {
+    val: ''
+  };
+
+  static getDerivedStateFromProps(props: Props, state: State){
+    return {
+      val: formatNum(props.value)
+    }
+  }
+
+  handleInput = (e:React.ChangeEvent<HTMLInputElement>) => {
+    let num = e.target.value.replace(/\s/g, '');
+    
+    if (/^\d+$/.test(num)){
+      const numInt:number = parseInt(num, 10);
+      this.props.onChange(numInt);
+      this.setState({ val: formatNum(numInt) });
+    }
+  };
+
+  render(){
+    return (
+      <input className="form-control" type="text" value={this.state.val} onChange={this.handleInput}/>
+    )
+  }
+}
