@@ -1,11 +1,13 @@
 import * as React from 'react';
 
-function App() {
+import SalaryCalculation from './components/SalaryCalculation';
+
+const App: React.FunctionComponent = () => {
   return (
-    <div>
-      Test!
+    <div className="card">
+      <SalaryCalculation value={40000} />
     </div>
-  );
+  )
 }
 
 export default App;
