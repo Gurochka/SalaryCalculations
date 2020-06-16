@@ -25,7 +25,7 @@ export default class InputNumber extends React.Component<Props> {
 
   handleInput = (e:React.ChangeEvent<HTMLInputElement>) => {
     let num = e.target.value.replace(/\s/g, '');
-    
+    if (!num) num = '0';
     if (/^\d+$/.test(num)){
       const numInt:number = parseInt(num, 10);
       this.props.onChange(numInt);

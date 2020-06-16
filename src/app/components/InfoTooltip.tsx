@@ -1,37 +1,29 @@
-import React, { SyntheticEvent } from 'react';
+import React, { SyntheticEvent, useState } from 'react';
 import QuestionCircle from './Icons/QuestionCircle'
 import CloseCircle from './Icons/CloseCircle'
 
-interface State {
-  showTooltip: boolean;
-}
-
-export default class InfoTooltip extends React.Component {
-  state: State = {
-    showTooltip: false
-  }
-
-  handleCloseTooltip = (e:SyntheticEvent) => {
+const InfoTooltip: React.FunctionComponent = (props) => {
+  const [showTooltip, setShowTooltip] = useState(false);
+  
+  const handleCloseTooltip = (e:SyntheticEvent) => {
     e.preventDefault();
-    this.setState({ showTooltip: false })
+    setShowTooltip(false)
   }
 
-  render(){
-    const { showTooltip } = this.state;
-
-    return (
-      <div className="info-tooltip" onMouseEnter={() => this.setState({ showTooltip: true})}>
-        { !showTooltip && <QuestionCircle /> }
-        { showTooltip && (
-            <>
-              <CloseCircle onClick={this.handleCloseTooltip} />
-              <div className="info-tooltip-tooltip">
-                {this.props.children}
-              </div>
-            </>
-          ) 
-        }
-      </div>
-    )
-  }
+  return (
+    <div className="info-tooltip" onMouseEnter={() => setShowTooltip(true)}>
+      { !showTooltip && <QuestionCircle /> }
+      { showTooltip && (
+          <>
+            <CloseCircle onClick={handleCloseTooltip} />
+            <div className="info-tooltip-tooltip">
+              {props.children}
+            </div>
+          </>
+        ) 
+      }
+    </div>
+  )
 }
+
+export default InfoTooltip;

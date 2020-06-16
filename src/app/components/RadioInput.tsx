@@ -20,7 +20,7 @@ const RadioInput: React.FunctionComponent<Props> = (props) => {
       <label className="form-check-label" htmlFor={`${props.name}_${props.value}`}>
         {props.children}
       </label>
-    </div>    
+    </div>
   )
 }
 
